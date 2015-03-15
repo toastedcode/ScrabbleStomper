@@ -16,21 +16,22 @@ import com.toast.scrabble.gui.Tile;
 
 public class ScrabbleStomper
 {
-   static final String DICTIONARY_FILE = "enable1.txt";
+   //static final String DICTIONARY_FILE = "enable1.txt";
+   static final String DICTIONARY_FILE = "sowpods.txt";
+
    
    public static void main(final String args[])
    {
-      JFrame frame = new JFrame("Toast Bot Controller");
+      JFrame frame = new JFrame("Scrabble Stomper");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
       JPanel centerPanel = new JPanel();
       
       Board hand = new Board(7, 1);
-      hand.addTiles("fazryume",  0,  0,  SwingConstants.HORIZONTAL);
+      hand.addTiles("a",  0,  0,  SwingConstants.HORIZONTAL);
       
       Board board = new Board(10, 10);
       board.addTile('a', 1, 1);
-      board.addTiles("boner", 3, 3, SwingConstants.HORIZONTAL);
       
       Solver solver = new Solver(hand, board);
       

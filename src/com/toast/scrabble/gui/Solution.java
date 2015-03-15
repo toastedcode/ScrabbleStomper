@@ -3,7 +3,7 @@ package com.toast.scrabble.gui;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Set;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,25 +39,25 @@ public class Solution extends JPanel
       add(Box.createHorizontalStrut(20));
       
       // Solution.
-      solution = new JTextArea();
-      JScrollPane scrollPane = new JScrollPane(solution);
+      solutionDisplay = new JTextArea();
+      JScrollPane scrollPane = new JScrollPane(solutionDisplay);
       scrollPane.setPreferredSize(new Dimension(300, 200));
       add(new JScrollPane(scrollPane));
    }
    
    private void solve()
    {
-      Set<String> words = solver.solve();
+      List<Solver.Solution> solutionlist = solver.solve();
       
-      solution.setText("There are " + words.size() + " possible solutions.\n");
+      solutionDisplay.setText("There are " + solutionlist.size() + " possible solutions.\n");
       
-      for (String word : words)
+      for (Solver.Solution solution : solutionlist)
       {
-         solution.append(word + "\n");
+         solutionDisplay.append(solution.word + " (" + solution.score + ")\n");
       }
    }
    
    private Solver solver;
    
-   private JTextArea solution;
+   private JTextArea solutionDisplay;
 }

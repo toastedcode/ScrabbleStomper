@@ -166,7 +166,17 @@ public class Board extends JPanel
                @Override
                public void mouseClicked(MouseEvent event)
                {
-                  select((JPanel)event.getSource());
+                  JPanel cell = (JPanel)event.getSource();
+                  if (cell.equals(selected))
+                  {
+                     unselect(cell);
+                  }
+                  else
+                  {
+                     select(cell);
+                  }
+                  
+                  cell.getParent().requestFocus();
                }
 
                @Override
@@ -196,17 +206,23 @@ public class Board extends JPanel
       }
    }
    
-   private void select(JPanel selected)
+   private void select(JPanel cell)
    {
-      if (this.selected != null)
+      if (selected != null)
       {
-         this.selected.setBorder(BorderFactory.createLineBorder(GRID_COLOR));         
+         unselect(selected);         
       }
       
-      if (selected != this.selected)
+      selected = cell;
+      selected.setBorder(BorderFactory.createLineBorder(SELECTED_COLOR));
+   }
+   
+   private void unselect(JPanel cell)
+   {
+      if (selected.equals(cell))
       {
-         this.selected = selected;
-         this.selected.setBorder(BorderFactory.createLineBorder(SELECTED_COLOR));
+         selected.setBorder(BorderFactory.createLineBorder(GRID_COLOR));   
+         selected = null;
       }
    }
    
